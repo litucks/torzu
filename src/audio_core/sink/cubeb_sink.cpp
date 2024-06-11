@@ -334,6 +334,48 @@ std::vector<std::string> ListCubebSinkDevices(bool capture) {
     return device_list;
 }
 
+/* REVERSION TO 3833 - function GetCubebLatency REINTRODUCED FROM 3833 - DIABLO 3 FIX */
+u32 GetCubebLatency() {
+    cubeb* ctx;
+
+#ifdef _WIN32
+    auto com_init_result = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+#endif
+
+    // Init cubeb
+    if (cubeb_init(&ctx, "yuzu Latency Getter", nullptr) != CUBEB_OK) {
+        LOG_CRITICAL(Audio_Sink, "cubeb_init failed");
+        // Return a large latency so we choose SDL instead.
+        return 10000u;
+    }
+
+#ifdef _WIN32
+    if (SUCCEEDED(com_init_result)) {
+        CoUninitialize();
+    }
+#endif
+
+    // Get min latency
+    cubeb_stream_params params{};
+    params.rate = TargetSampleRate;
+    params.channels = 2;
+    params.format = CUBEB_SAMPLE_S16LE;
+    params.prefs = CUBEB_STREAM_PREF_NONE;
+    params.layout = CUBEB_LAYOUT_STEREO;
+
+    u32 latency{0};
+    const auto latency_error = cubeb_get_min_latency(ctx, &params, &latency);
+    if (latency_error != CUBEB_OK) {
+        LOG_CRITICAL(Audio_Sink, "Error getting minimum latency, error: {}", latency_error);
+        latency = TargetSampleCount * 2;
+    }
+    latency = std::max(latency, TargetSampleCount * 2);
+    cubeb_destroy(ctx);
+    return latency;
+}
+
+// REVERTED back to 3833 - Below namespace section and function IsCubebSuitable() removed, reverting to GetCubebLatency() above. - DIABLO 3 FIX
+/*
 namespace {
 static long TmpDataCallback(cubeb_stream*, void*, const void*, void*, long) {
     return TargetSampleCount;
@@ -400,5 +442,6 @@ bool IsCubebSuitable() {
     return true;
 #endif
 }
+*/
 
 } // namespace AudioCore::Sink
