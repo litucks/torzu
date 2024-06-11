@@ -87,12 +87,20 @@ private:
  */
 std::vector<std::string> ListSDLSinkDevices(bool capture);
 
+// REVERSION - function GetSDLLatency() reintroduced from EA-3833 - DIABLO 3 FIX
 /**
+ * Get the reported latency for this sink.
+ *
+ * @return Minimum latency for this sink.
+ */
+u32 GetSDLLatency();
+
+/** REVERTED back to 3833 - Below function IsSDLSuitable() removed, reverting to GetSDLLatency() above. - DIABLO 3 FIX
  * Check if this backend is suitable for use.
  * Checks if enabled, its latency, whether it opens successfully, etc.
  *
  * @return True is this backend is suitable, false otherwise.
  */
-bool IsSDLSuitable();
+//bool IsSDLSuitable(); // REVERTED for GetSDLLatency() from EA-3833
 
 } // namespace AudioCore::Sink
