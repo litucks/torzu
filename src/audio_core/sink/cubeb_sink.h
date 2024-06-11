@@ -96,12 +96,20 @@ private:
  */
 std::vector<std::string> ListCubebSinkDevices(bool capture);
 
+// REVERSION - function GetCubebLatency() reintroduced from EA-3833 - DIABLO 3 FIX
+/**
+ * Get the reported latency for this sink.
+ *
+ * @return Minimum latency for this sink.
+ */
+u32 GetCubebLatency();
+
 /**
  * Check if this backend is suitable for use.
  * Checks if enabled, its latency, whether it opens successfully, etc.
  *
  * @return True is this backend is suitable, false otherwise.
  */
-bool IsCubebSuitable();
+// bool IsCubebSuitable(); // REVERTED BACK TO GetCubebLatency() FROM 3833
 
 } // namespace AudioCore::Sink
