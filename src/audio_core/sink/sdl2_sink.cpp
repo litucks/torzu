@@ -230,6 +230,13 @@ std::vector<std::string> ListSDLSinkDevices(bool capture) {
     return device_list;
 }
 
+/* REVERSION to 3833 - function GetSDLLatency() REINTRODUCED FROM 3833 - DIABLO 3 FIX */
+u32 GetSDLLatency() {
+    return TargetSampleCount * 2;
+}
+
+// REVERTED back to 3833 - Below function IsSDLSuitable() removed, reverting to GetSDLLatency() above. - DIABLO 3 FIX
+/*
 bool IsSDLSuitable() {
 #if !defined(HAVE_SDL2)
     return false;
@@ -267,5 +274,6 @@ bool IsSDLSuitable() {
     return true;
 #endif
 }
+*/
 
 } // namespace AudioCore::Sink
