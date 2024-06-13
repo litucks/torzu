@@ -502,8 +502,6 @@ if(ENABLE_QT)
         set(YUZU_QT_NO_CMAKE_SYSTEM_PATH)
 
         if(YUZU_USE_BUNDLED_QT)
-            ## removed "AND MSVC_VERSION LESS 1940" below as current Visual Studio version is 19.40.XXX... 
-            ## it would need to be "1941" or higher now. Can leave it out for now until it's necessary again.
             ## if ((MSVC_VERSION GREATER_EQUAL 1920 AND MSVC_VERSION LESS 1940) AND ARCHITECTURE_x86_64)
             if ((MSVC_VERSION GREATER_EQUAL 1920) AND ARCHITECTURE_x86_64)
                 set(QT_BUILD qt-5.15.2-msvc2019_64)
@@ -534,8 +532,6 @@ endif()
 if (ENABLE_SDL2)
     if (YUZU_USE_BUNDLED_SDL2)
         # Detect toolchain and platform
-        ## removed "AND MSVC_VERSION LESS 1940" below as current Visual Studio version is 19.40.XXX... 
-        ## it would need to be "1941" or higher now. Can leave it out for now until it's necessary again.
         ## if ((MSVC_VERSION GREATER_EQUAL 1920 AND MSVC_VERSION LESS 1940) AND ARCHITECTURE_x86_64)
         if ((MSVC_VERSION GREATER_EQUAL 1920) AND ARCHITECTURE_x86_64)
             set(SDL2_VER "SDL2-2.28.2")
