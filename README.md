@@ -34,8 +34,9 @@ It is not all over though. My plan is to:
  - push some bigger updates from my private upstream whenever I feel like (no promises)
  - NOT publish releases. If someone feels like publishing builds they should feel free to do that
  - NOT offer support in any way
+ - accept pull requests as long as they are of reasonable quality
 
-Again, thanks to everyone who has supported me in any way (even by creating bug reports), I really appreciate it.
+Again, thanks to everyone who has supported my efforts so far in any way (even by creating bug reports), I really appreciate it.
 
 ## Compatibility
 
