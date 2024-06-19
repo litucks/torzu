@@ -111,7 +111,7 @@ void ConfigureDebug::ApplyConfiguration() {
     Settings::values.extended_logging = ui->extended_logging->isChecked();
     Settings::values.perform_vulkan_check = ui->perform_vulkan_check->isChecked();
     UISettings::values.disable_web_applet = ui->disable_web_applet->isChecked();
-    Debugger::ToggleConsole();
+    DebuggerYuzu::ToggleConsole();
     Common::Log::Filter filter;
     filter.ParseFilterString(Settings::values.log_filter.GetValue());
     Common::Log::SetGlobalFilter(filter);

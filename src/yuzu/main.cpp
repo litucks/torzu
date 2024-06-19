@@ -1420,7 +1420,7 @@ void GMainWindow::RestoreUIState() {
 
     ui->action_Show_Status_Bar->setChecked(UISettings::values.show_status_bar.GetValue());
     statusBar()->setVisible(ui->action_Show_Status_Bar->isChecked());
-    Debugger::ToggleConsole();
+    DebuggerYuzu::ToggleConsole();
 }
 
 void GMainWindow::OnAppFocusStateChanged(Qt::ApplicationState state) {
